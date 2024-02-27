@@ -1,9 +1,10 @@
+import React from "react";
 import { Col, Button } from "react-bootstrap";
 import Badge from "./Badge.js";
 import { useState } from "react";
 
-function UserProfile({ user }) {
-  const { name, avatar, phone, id, teams } = user;
+function UserProfile (props) {
+  const {user} = props;
   const [badgeStatus, setBadgeStatus] = useState(false);
 
   function handleClick() {
@@ -12,15 +13,15 @@ function UserProfile({ user }) {
     console.log(badgeStatus);
   }
   return (
-    <Col key={id} className="p-2 text-center border border-1 rounded-4 m-1">
-      <img src={avatar} alt={name} className="img-fluid rounded-circle Image" />
-      <h1 className="fs-4">{name}</h1>
-      <p>{phone}</p>
+    <Col key={user.id} className="p-2 text-center border border-1 rounded-4 m-1">
+      <img src={user.avatar} alt={user.name} className="img-fluid rounded-circle Image" />
+      <h1 className="fs-4">{user.name}</h1>
+      <p>{user.phone}</p>
       <Button variant="secondary" onClick={() => handleClick()}>
         Show Teams
       </Button>
       <div className={badgeStatus ? "" : "d-none"}>
-        <Badge teams={teams} />
+        <Badge teams={user.teams} />
       </div>
     </Col>
   );
